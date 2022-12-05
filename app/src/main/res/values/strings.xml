@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name" translatable="false">CookBookApp</string>
+    <string name="take_photo">Take Photo</string>
+</resources>
