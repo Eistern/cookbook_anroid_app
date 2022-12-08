@@ -71,7 +71,7 @@ class CookBookBackendClient {
     }
 
     companion object {
-        const val BACKEND_URL = "https://c42b991d-0d1a-4761-a986-95e97ca1e4c5.mock.pstmn.io/test"
+        const val BACKEND_URL = "https://7a2ef0ac-8344-42b3-a0b8-7f323a56d887.mock.pstmn.io/test"
         const val TAG = "CookBookClient"
     }
 }

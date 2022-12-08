@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/headline"
+        android:layout_width="224dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="25dp"
+        android:text="@string/recipe_headline"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/ingredients"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ingredients"
+        android:layout_width="372dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="14dp"
+        android:text="@string/recipe_ingredients"
+        app:layout_constraintBottom_toTopOf="@+id/steps"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headline" />
+
+    <TextView
+        android:id="@+id/steps"
+        android:layout_width="367dp"
+        android:layout_height="92dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="342dp"
+        android:text="@string/recipe_steps"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ingredients" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="take_photo">Сделать снимок</string>
+    <string name="recipe_headline">Пример названия рецепта</string>
+    <string name="recipe_ingredients">Пример ингридиентов</string>
+    <string name="recipe_steps">Пример шагов</string>
 </resources>

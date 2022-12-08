@@ -2,6 +2,7 @@ package nsu.fit.cookbookapp
 
 import android.Manifest
 import android.content.ContentValues
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -17,11 +18,13 @@ import androidx.core.content.ContextCompat
 import nsu.fit.cookbookapp.client.CookBookBackendClient
 import nsu.fit.cookbookapp.client.CookBookRecipe
 import nsu.fit.cookbookapp.databinding.ActivityMainBinding
+import nsu.fit.cookbookapp.resultsShow.ResultsShowActivity
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.function.Consumer
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityMainBinding
@@ -97,7 +100,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayLookupResults(recipes: List<CookBookRecipe>) {
-
+        this.runOnUiThread {
+            val intent = Intent(this, ResultsShowActivity()::class.java)
+            intent.putExtra("results", ArrayList(recipes))
+            startActivity(intent)
+        }
     }
 
     private fun startCamera() {

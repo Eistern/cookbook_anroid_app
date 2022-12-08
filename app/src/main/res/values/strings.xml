@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">CookBookApp</string>
     <string name="take_photo">Take Photo</string>
+    <string name="recipe_headline">Example recipe name</string>
+    <string name="recipe_ingredients">Recipe ingredients</string>
+    <string name="recipe_steps">Recipe steps</string>
 </resources>
