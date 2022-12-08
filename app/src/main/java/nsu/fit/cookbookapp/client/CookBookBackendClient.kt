@@ -3,18 +3,28 @@ package nsu.fit.cookbookapp.client
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapter
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.InputStream
+import java.util.function.Consumer
 
 
 class CookBookBackendClient {
     private val client = OkHttpClient()
 
-    fun postPicture(pictureLocalUri: InputStream?) {
+    @OptIn(ExperimentalStdlibApi::class)
+    private val deserializer = Moshi.Builder()
+        .addLast(KotlinJsonAdapterFactory())
+        .build()
+        .adapter<List<CookBookRecipe>>()
+
+    fun postPicture(pictureLocalUri: InputStream?, resultConsumer: Consumer<List<CookBookRecipe>>) {
         val scaledPictureBitmap = loadScaledPictureIntoBitmap(pictureLocalUri)
 
         Log.d(TAG,"Created scaled bitmap")
@@ -41,6 +51,10 @@ class CookBookBackendClient {
 
             override fun onResponse(call: Call, response: Response) {
                 Log.d(TAG, "Got response $response")
+                response.body.use {
+                    val parsed = deserializer.fromJson(it!!.source()) ?: return
+                    resultConsumer.accept(parsed)
+                }
             }
         })
     }

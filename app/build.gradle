@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "nsu.fit.cookbookapp"
-        minSdk 21
+        minSdk 24
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -52,9 +52,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
 
-    implementation 'com.github.bumptech.glide:glide:4.14.2'
-    // Skip this if you don't want to use integration libraries or configure Glide.
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
+    implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'

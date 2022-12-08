@@ -15,11 +15,13 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import nsu.fit.cookbookapp.client.CookBookBackendClient
+import nsu.fit.cookbookapp.client.CookBookRecipe
 import nsu.fit.cookbookapp.databinding.ActivityMainBinding
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import java.util.function.Consumer
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityMainBinding
@@ -86,12 +88,16 @@ class MainActivity : AppCompatActivity() {
                     val msg = "Photo capture succeeded: ${output.savedUri}"
                     getExternalFilesDir(Environment.DIRECTORY_PICTURES)
                     val savedImageInputStream = contentResolver.openInputStream(output.savedUri!!)
-                    client.postPicture(savedImageInputStream)
+                    client.postPicture(savedImageInputStream) { t -> displayLookupResults(t) }
                     Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, msg)
                 }
             }
         )
+    }
+
+    private fun displayLookupResults(recipes: List<CookBookRecipe>) {
+
     }
 
     private fun startCamera() {
@@ -162,8 +168,7 @@ class MainActivity : AppCompatActivity() {
         private const val REQUEST_CODE_PERMISSIONS = 10
         private val REQUIRED_PERMISSIONS =
             mutableListOf (
-                Manifest.permission.CAMERA,
-                Manifest.permission.RECORD_AUDIO
+                Manifest.permission.CAMERA
             ).apply {
                 if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
                     add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
