@@ -46,14 +46,16 @@ class CookBookBackendClient {
         client.newCall(request).enqueue(object : Callback {
 
             override fun onFailure(call: Call, e: IOException) {
-                TODO("Not yet implemented")
+                Log.e(TAG, "Got error for the call $call", e)
             }
 
             override fun onResponse(call: Call, response: Response) {
                 Log.d(TAG, "Got response $response")
-                response.body.use {
-                    val parsed = deserializer.fromJson(it!!.source()) ?: return
-                    resultConsumer.accept(parsed)
+                if (response.isSuccessful) {
+                    response.body.use {
+                        val parsed = deserializer.fromJson(it!!.source()) ?: return
+                        resultConsumer.accept(parsed)
+                    }
                 }
             }
         })
@@ -71,7 +73,7 @@ class CookBookBackendClient {
     }
 
     companion object {
-        const val BACKEND_URL = "https://7a2ef0ac-8344-42b3-a0b8-7f323a56d887.mock.pstmn.io/test"
+        const val BACKEND_URL = "http://192.168.0.10:8080/main"
         const val TAG = "CookBookClient"
     }
 }
